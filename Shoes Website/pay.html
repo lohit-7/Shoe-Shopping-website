@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #6b6464;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #payment {
+            background-color: #64cc72;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .cash-on-delivery-table {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .cash-on-delivery-table input {
+            margin-right: 10px;
+        }
+
+        .cash-on-delivery-table span {
+            font-size: 18px;
+        }
+
+        button, a.button {
+            padding: 10px 20px;
+            background-color: #d400ff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        button:hover, a.button:hover {
+            background-color: #0056b3;
+        }
+
+        .back-button {
+            background-color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+    <div id="payment">
+        <h2>Payment</h2>
+        <p>Select a payment method:</p>
+        <div class="cash-on-delivery-table">
+            <input type="radio" id="cashOnDelivery" name="paymentMethod" value="Cash on Delivery">
+            <span>Cash on Delivery</span>
+        </div>
+        <br /><br />
+        <button onclick="completeOrder()">Complete Order</button>
+        <a href="pro.html" class="button back-button">Back</a>
+    </div>
+
+    <script>
+        function completeOrder() {
+            var cashOnDelivery = document.getElementById('cashOnDelivery');
+            if (cashOnDelivery.checked) {
+                alert('Order completed successfully! Payment will be made via Cash on Delivery.');
+            } else {
+                alert('Select a Payment Option');
+            }
+        }
+    </script>
+</body>
+</html>

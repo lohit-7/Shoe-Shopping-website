@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Order Page</title>
+  <style>
+      body {
+      font-family: Arial, sans-serif;
+      background-color: rgb(129, 182, 251);
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px;
+    }
+
+    #address, #order-summary, #payment {
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid #030202;
+      width: 300px;
+      max-width: 100%;
+      background-color: #f654de; /* Add background color */
+      border-radius: 10px; /* Add border-radius for rounded corners */
+    }
+
+    #address {
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    #order-summary, #payment {
+      display: none;
+      background-color: #9bef71; 
+      border-radius: 10px; 
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-right: 10px;
+      border-radius: 5px; 
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Style for the Back button */
+    .back-button {
+      background-color: #d9534f;
+    }
+    .cash-on-delivery-table {
+      display: table;
+      margin-top: 10px;
+    }
+
+    .cash-on-delivery-table-row {
+      display: table-row;
+    }
+
+    .cash-on-delivery-table-cell {
+      display: table-cell;
+      padding-right: 10px;
+    }
+    .pay-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+
+  .pay-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .alert {
+    display: none;
+    color: #ff0026;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.alert.active {
+    display: block;
+}
+
+.buttonBox button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #eb12ff;
+    cursor: pointer;
+}
+
+.buttonBox button:hover {
+    background-color:yellow;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+   <form action="" id="contactForm">
+    <div class="alert">Your message sent</div>
+      <div id="address">
+        
+        <h2 style="color: #333; text-align: center;">Address</h2>
+        <table>
+          <tr>
+            <td><label for="fullName">Full Name:</label></td>
+            <td><input type="text" id="fullName" placeholder="Enter full name"></td>
+          </tr>
+          <tr>
+            <td><label for="phoneNumber">Phone Number:</label></td>
+            <td><input type="text" id="phoneNumber" placeholder="Enter phone number" maxlength="10"></td>
+          </tr>
+          <!-- Add more rows for other address fields -->
+          <tr>
+            <td><label for="pinCode">Pin Code:</label></td>
+            <td><input type="text" id="pinCode" placeholder="Enter pin code" maxlength="6"></td>
+          </tr>
+          <tr>
+            <td><label for="state">State:</label></td>
+            <td><input type="text" id="state" placeholder="Enter state"></td>
+          </tr>
+          <tr>
+            <td><label for="city">City:</label></td>
+            <td><input type="text" id="city" placeholder="Enter city"></td>
+          </tr>
+          <tr>
+            <td><label for="houseNo">House No:</label></td>
+            <td><input type="text" id="houseNo" placeholder="Enter house number"></td>
+          </tr>
+          <tr>
+            <td><label for="roadNameArea">Road Name Area:</label></td>
+            <td><input type="text" id="roadNameArea" placeholder="Enter road name and area"></td>
+          </tr>
+        </table>
+        <button type="submit">Save Address</button>
+        <a href="pay.html" class="pay-button">Pay</a>
+      </div>
+      
+    </form>
+    
+  </header>
+
+ 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+<script src="./mail.js"></script>
+</body>
+</html>

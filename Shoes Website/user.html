@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="login_form">
+        <div class="left">
+            <img src="image/logshoes.png">
+        </div>
+
+        <div class="right">
+            <h1>Welcome Back!</h1>
+
+            <form action="#" method="post" onsubmit="login(event)">
+                <p>User Name</p>
+                <div class="user">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" name="user" placeholder="User Name" class="username">
+                </div>
+
+                <p class="password_tag">Password</p>
+                <div class="password">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" name="password" placeholder="Password">
+                </div>
+
+                <p class="forget">Forget Password?</p>
+
+                <button type="submit">Login</button>
+
+                <div class="signup">
+                    <p>Don't have an account? <a href="#" onclick="toggleSignupForm()">Sign up</a></p>
+                </div>
+            </form>
+
+            <!-- Signup Form -->
+            <div id="signupForm" style="display: none;">
+                <h1>Sign Up</h1>
+                <form action="#" method="post" onsubmit="saveSignup(event)">
+                    <p>User Name</p>
+                    <div class="user">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" name="signupUser" placeholder="User Name" class="username">
+                    </div>
+
+                    <p class="password_tag">Password</p>
+                    <div class="password">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" name="signupPassword" placeholder="Password">
+                    </div>
+
+                    <button type="submit">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="usernameDisplay" style="display: none;">
+        <h2>Welcome, <span id="displayedUsername"></span>!</h2>
+    </div>
+
+    <script>
+        let signupFormVisible = false;
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+
+        function showNotification(message) {
+            alert(message);
+        }
+
+        function toggleSignupForm() {
+            const signupForm = document.getElementById('signupForm');
+            signupForm.style.display = signupFormVisible ? 'none' : 'block';
+            signupFormVisible = !signupFormVisible;
+        }
+
+        function saveSignup(event) {
+            event.preventDefault();
+            const signupUsername = document.querySelector('input[name="signupUser"]').value;
+            const signupPassword = document.querySelector('input[name="signupPassword"]').value;
+
+            // Check if the username already exists
+            const existingUser = users.find(user => user.username === signupUsername);
+            if (existingUser) {
+                showNotification('Username already exists. Please choose a different username.');
+                return;
+            }
+
+            // Save the user
+            users.push({ username: signupUsername, password: signupPassword });
+            localStorage.setItem('users', JSON.stringify(users));
+
+            showNotification(`Sign Up Successful! Welcome, ${signupUsername}`);
+            document.getElementById('displayedUsername').innerText = signupUsername;
+            document.getElementById('usernameDisplay').style.display = 'block';
+            document.getElementById('signupForm').style.display = 'none';
+            signupFormVisible = true;
+        }
+
+        function login(event) {
+            event.preventDefault();
+            const loginUsername = document.querySelector('input[name="user"]').value;
+            const loginPassword = document.querySelector('input[name="password"]').value;
+
+            // Check if the user exists and the password is correct
+            const user = users.find(user => user.username === loginUsername && user.password === loginPassword);
+            if (user) {
+                showNotification(`Login Successful! Welcome, ${loginUsername}`);
+                document.getElementById('displayedUsername').innerText = loginUsername;
+                document.getElementById('usernameDisplay').style.display = 'block';
+                window.location.href = "index.html";
+            } else {
+                showNotification('Invalid username or password. Please Sign Up.');
+            }
+        }
+    </script>
+
+</body>
+</html>

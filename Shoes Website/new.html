@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background:linear-gradient(#b9b974, #a290b7);
+        }
+        h1 {
+            margin: 35px 0;
+            font-size: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #c72092, #6c14d0);
+        }
+        form {
+            background:linear-gradient(#e3b1d3, #a290b7);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 50%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        input[type="number"] {
+            width: 50%;
+            padding: 10px;
+            margin-bottom: 20px;
+          
+           
+        }
+        label[for="quantity"]{
+            margin-left: 240px;
+        }
+
+        button {
+            background: linear-gradient(to right, #c72092, #6c14d0);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        #selectedImage {
+        max-width: 10%;
+        height: auto;
+        margin-top: 10px;
+        }
+        .alert {
+    display: none;
+    color: #ff0026;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.alert.active {
+    display: block;
+}
+
+    </style>
+</head>
+ <body>
+    <h1>Product Purchase</h1>
+    <form id="purchaseForm">
+        <div class="alert">Your message sent</div>
+        <label for="productSelect">Select a Product:</label>
+        <select id="productSelect" required>
+            <option value="">Select a product</option>
+            <option value="product1">NIKE-Air Gold Max</option>
+            <option value="product2">NIKE-Black Rac</option>
+            <option value="product3">NIKE-Blue Glow</option>
+            <option value="product4">NIKE-Track</option>
+            <option value="product5">NIKE-Brown SPX</option>
+            <option value="product6">NIKE-Organ</option>
+            <option value="product7">NIKE-RWB</option>
+            <option value="product8">NIKE-M Pro</option>
+            <option value="product9">NIKE-Max Pro</option>
+            
+        </select>
+
+        <label for="size">Size:</label>
+        <input type="text" id="size" name="size" required>
+<br>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" required>
+        <button type="submit">submit</button>
+    </form>
+    <button type="button" id="purchaseButton">Purchase</button>
+    
+    
+        <div id="purchaseDetails">
+            <h2>Purchase Details:</h2>
+            <img id="selectedImage" src="" alt="">
+            <p>Product Name: <span id="productName"></span></p>
+            <p>Size: <span id="selectedSize"></span></p>
+            <p>Price: <span id="productPrice"></span></p>
+            <p>Quantity: <span id="selectedQuantity"></span></p>
+            <p>Total Price: <span id="totalPrice" style="font-weight: bold; color: red;"></span></p>
+            <!-- Add more details here as needed -->
+            <a href="hi.html"><button>Add Address</button></a>
+            
+        </div>
+    
+    <!-- ... (previous HTML code) ... -->
+
+    <script>
+
+        const productSelect = document.getElementById("productSelect");
+        const purchaseButton = document.getElementById("purchaseButton");
+        const purchaseForm = document.getElementById("purchaseForm");
+        const purchaseDetails = document.getElementById("purchaseDetails");
+        const selectedImage = document.getElementById("selectedImage");
+        const productName = document.getElementById("productName");
+        const selectedSize = document.getElementById("selectedSize");
+        const selectedQuantity = document.getElementById("selectedQuantity");
+        const productPrice = document.getElementById("productPrice");
+        const totalPrice = document.getElementById("totalPrice");
+
+        // Define a product list with details
+        const products = {
+            product1: {
+                name: 'NIKE-Air Gold Max',
+                image: 'shoes1.png',
+                price: 18990
+            },
+            product2: {
+                name: 'NIKE-Black Rac',
+               image: 'shoes2.png',
+               price: 20000
+            },
+            product3: {
+                name: 'NIKE-Blue Glow',
+               image: 'shoes3.png',
+               price: 22000
+            },
+            product4: {
+                name: 'NIKE-Track',
+               image: 'shoes4.png',
+               price: 12300
+            },
+            product5: {
+                name: 'NIKE-Brown SPX',
+               image: 'shoes5.png',
+               price: 32000
+            },
+            product6: {
+                name: 'NIKE-Organ',
+               image: 'shoes6.png',
+               price: 16000
+            },
+            product7: {
+                name: 'NIKE-RWB',
+               image: 'shoes7.png',
+               price: 12000
+            },
+            product8: {
+                name: 'NIKE-M Pro',
+                image: 'shoes8.png',
+                price: 10000
+            },
+            product9: {
+                name: 'NIKE-Max Pro',
+                image: 'shoes8.png',
+                price: 18000
+            },
+            
+        };
+
+        purchaseButton.addEventListener("click", () => {
+        const selectedProduct = productSelect.value;
+        const size = document.getElementById("size").value;
+        const quantity = parseInt(document.getElementById("quantity").value, 10);
+
+        if (!selectedProduct) {
+            // Display a warning if no product is selected
+            alert("Please select a product before purchasing.");
+            return;
+        }
+
+        if (!size || isNaN(quantity) || quantity <= 0) {
+            alert("Please enter valid size and quantity.");
+            return;
+        }
+
+        const product = products[selectedProduct];
+        const productNameValue = product.name;
+        const productImageValue = product.image;
+        const productPriceValue = product.price;
+
+        // Calculate the total price (price * quantity)
+        const totalPriceValue = productPriceValue * quantity;
+
+        // Update the purchase details on the page
+        selectedImage.src = `image/${productImageValue}`;
+        productName.textContent = productNameValue;
+        selectedSize.textContent = size;
+        selectedQuantity.textContent = quantity;
+        productPrice.textContent = `₹${productPriceValue.toLocaleString()}`; // Display product price
+        totalPrice.textContent = `₹${totalPriceValue.toLocaleString()}`;
+    });
+    </script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+   <script src="./cart.js"></script>
+ </body>
+</html>

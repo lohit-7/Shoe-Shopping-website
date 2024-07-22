@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="about" id="About">
+        
+        <h1>Web<span>About</span></h1>
+
+        <div class="about_main">
+            <div class="about_image">
+                <div class="about_small_image">
+                    <img src="image/red_shoes1.png" onclick="functio(this)">
+                    <img src="image/red_shoes2.png" onclick="functio(this)">
+                    <img src="image/red_shoes3.png" onclick="functio(this)">
+                    <img src="image/red_shoes4.png" onclick="functio(this)">
+                </div>
+
+                <div class="image_contaner">
+                    <img src="image/red_shoes1.png" id="imagebox">
+                </div>
+
+            </div>
+
+            <div class="about_text">
+                <p>
+                    Your journey to success begins here, with Nike Collect. Step into the future of sportswear, where quality, innovation, and style converge. Redefine what's possible and showcase your determination to the world. Dive into Nike Collect today and let your achievements speak for themselves. Join the movement; it's time to showcase your greatness."
+                </p>
+            </div>
+
+        </div>
+
+        <a href="shop.html" class="about_btn">Shop Now</a>
+
+        <script>
+            function functio(small){
+                var full = document.getElementById("imagebox")
+                full.src = small.src
+            }
+        </script>
+        
+    </div>
+
+
+</body>
+</html>
